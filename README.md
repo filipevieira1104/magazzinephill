@@ -6,5 +6,7 @@
 
 <h3>Caracteristicas</h3>
 <p>Loja online desenvolvida em Python e Django.</p>
-<p>A loja contém um menu navbar com as categorias, onde o usuário pode navegar tanto pelas as categorias que lhe agrada ou pode escolher a opão de todos, para ver todos os produtos cadastrado na loja, após escolher</p>
-![image](https://github.com/filipevieira1104/magazzinephill/assets/61087331/d7878641-4046-4919-b99e-fb297ab8afab)
+<p>A loja contém um menu navbar com as categorias, onde o usuário pode navegar tanto pelas as categorias que lhe agrada ou pode escolher a opão de todos, para ver todos os produtos cadastrado na loja</p>
+
+![image](https://github.com/filipevieira1104/magazzinephill/assets/61087331/4d50d63d-1523-4d06-afc3-833920f03e43)
+
