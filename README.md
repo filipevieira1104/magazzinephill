@@ -15,3 +15,7 @@
 Após escolher o produto o usuário é direcionando para a página de detalhes do produto e contém um botão para adicionar o produto no carrinho.
 
 ![image](https://github.com/filipevieira1104/magazzinephill/assets/61087331/f8b9e6ee-a287-4a0a-979a-ccad00924fb6)
+
+<h3>Carrinho de compras</h3>
+
+<p>Ao clicar no botão "Adicionar no carrinho" o usuário é direcionado para o carrinho de compras, onde ele tem a opçã</p>
