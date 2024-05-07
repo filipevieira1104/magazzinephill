@@ -1,0 +1,35 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <title>{% block 'title' %}MagazzinePhill{% endblock %}</title>
+</head>
+<body>
+    <div id="header">
+      <a href="{% url 'shop:product_list' %}" style="font-size: 35px; color: #5993bb;" class="logo"><i class="bi bi-cart4"></i> MAGAZZINE<span style="color: #ff9e15;">PHILL</span></a>
+    </div>
+    <div id="subheader">
+        <div class="cart">
+            {% with total_items=cart|length %}
+          {% if total_items > 0 %}
+            <i style="font-size: 30px;" class="bi bi-cart-check-fill"></i>
+            <a href="{% url 'cart:cart_detail' %}">
+              {{ total_items }} item{{ total_items|pluralize }},
+              R${{ cart.get_total_price }}
+            </a>
+          {% elif not order %}
+          <i style="font-size: 30px;" class="bi bi-cart-check-fill"></i> Seu carrinho está vazio.
+          {% endif %}
+        {% endwith %}
+        </div>
+    </div>
+    <div id="content">
+        {% block 'content' %}{% endblock %}
+    </div>
+</body>
+</html>

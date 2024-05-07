@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'title' %}Pague seu pedido{% endblock %}
+
+{% block 'content' %}
+    <h1>Resumo do pedido</h1>
+    <table class="cart">
+        <thead>
+            <tr>
+                <th>Imagem</th>
+                <th>Produto</th>
+                <th>Preço</th>
+                <th>Quantidade</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.items.all %}
+                <tr class="row{% cycle '1' '2' '3' %}">
+                    <td>
+                        <img src="{% if item.product.image %}{{ item.product.image.url }}{% else %}{% static 'img/no-image.png' %}{% endif %}" alt="">
+                    </td>
+                    <td>{{ item.product.name }}</td>
+                    <td class="num">R$ {{ item.price }}</td>
+                    <td class="num">{{ item.quantity }}</td>
+                    <td class="num">{{ item.get_cost }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        {% if order.coupon %}
+        <tr class="subtotal">
+          <td>Subtotal</td>
+          <td colspan="3"></td>
+          <td class="num">
+            R${{ order.get_total_cost_before_discount|floatformat:2 }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            "{{ order.coupon.code }}" coupon
+            ({{ order.discount }}% off)
+          </td>
+          <td colspan="3"></td>
+          <td class="num neg">
+            - R${{ order.get_discount|floatformat:2 }}
+          </td>
+        </tr>
+      {% endif %}
+      <tr class="total">
+        <td>Total</td>
+        <td colspan="3"></td>
+        <td class="num">
+          R${{ order.get_total_cost|floatformat:2 }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <form action="{% url 'payment:process' %}" method="post">
+    <input type="submit" value="Finalizar">
+    {% csrf_token %}
+  </form>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block 'title' %}{% trans 'Pagamento' %}{% endblock %}
+
+{% block 'content' %}
+    <h1>{% trans 'Finalizar compra' %}</h1>
+    <div class="order-info">
+        <h3>{% trans 'Resumo da compra' %}</h3>
+        <ul>
+            {% for item in cart %}
+                <li>
+                    {{ item.quantity }}x {{ item.product.name }}
+                    <span>R$ {{ item.total_price }}</span>
+                </li>
+                <br>
+                <hr>
+            {% endfor %}
+            {% if cart.coupon %}
+                <li>
+                    {% blocktrans with code=cart.coupon.code discont=cart.coupon.discount %}
+                        "{{ code }}" ({{ discount }}% off)
+                    {% endblocktrans %}    
+                    <span class="neg">- R${{ cart.get_discount|floatformat:2}}</span>
+                </li>
+            {% endif %}
+        </ul>
+        <p>{% trans 'Total' %}: R$ {{ cart.get_total_price_after_discount|floatformat:2 }}</p>
+    </div>
+    <form action="" method="POST" class="order-form">
+        {{ form.as_p}}
+        <p><input type="submit" value="{% trans 'Finalizar compra' %}"></p>
+        {% csrf_token %}
+    </form>
+{% endblock %}
